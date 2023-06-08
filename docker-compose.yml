@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8000:8000
+    depends_on:
+      - mongodb
+    command: sh entrypoint.sh
+    container_name: express
+
+  mongodb:
+    image: mongo:6.0
+    volumes:
+      - ./mongodb_data:/data/db
+    ports:
+      - 27017:27017
+    container_name: mongo
+    
