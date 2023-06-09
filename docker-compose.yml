@@ -1,23 +1,33 @@
 version: '3'
 
 services:
-  node:
+  web:
     build:
       context: .
       dockerfile: Dockerfile
     restart: always
+    volumes:
+      - ./:/app
+      #- /app/node_modules
     ports:
       - 8000:8000
     depends_on:
-      - mongodb
+      - db
     command: sh entrypoint.sh
     container_name: express
 
-  mongodb:
-    image: mongo:6.0
+  db:
+    image: mdillon/postgis:11-alpine
+    container_name: psql
+    env_file: pg_env.txt
     volumes:
-      - ./mongodb_data:/data/db
-    ports:
-      - 27017:27017
-    container_name: mongo
+      - ./postgres-data:/var/lib/postgresql/data
+
+  # mongodb:
+  #   image: mongo:6.0
+  #   volumes:
+  #     - ./mongodb_data:/data/db
+  #   ports:
+  #     - 27017:27017
+  #   container_name: mongo
     
