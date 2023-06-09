@@ -2,22 +2,20 @@ import { Express, Router as ExpressRouter } from "express";
 import { guardianRSSFeedController } from "./controller/RSSFeedController";
 
 class Router {
-  readonly app: Express;
-  readonly router: ExpressRouter;
+  private router: ExpressRouter;
 
-  constructor(app: Express) {
+  constructor() {
     console.log("this is working");
-    this.app = app;
     this.router = ExpressRouter();
+    this.initializeRoutes();
+  }
+  initializeRoutes = () => {
+    this.router.get("/", guardianRSSFeedController);
   }
 
-  guardianRssFeedRouter = () => {
-    this.app.get("/:slug", guardianRSSFeedController);
-  };
-
-  setupRoutes = () => {
-    this.app.use("/v1", this.router);
-  };
+  getRoutes = () => {
+    return this.router;
+  }
 }
 
 export default Router;

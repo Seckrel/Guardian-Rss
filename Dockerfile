@@ -16,7 +16,7 @@ RUN apk update && apk add bash
 COPY package*.json yarn.lock ./app/
 
 # Install dependencies
-RUN yarn install
+# RUN yarn install
 
 # Copy the source code to the working directory
 #COPY . .
