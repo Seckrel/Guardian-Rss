@@ -1,5 +1,7 @@
 import { Router as ExpressRouter, Response, Request } from "express";
 import { kebabCaseValidator } from "../validators/paramsValidator.js";
+import { getGuardianRSSFeedXML } from "@services/guardianRSSService.js";
+// import { getGuardianRSSFeedXML } from "../services/guardianRSSService.js";
 
 const router: ExpressRouter = ExpressRouter();
 
@@ -9,13 +11,15 @@ router.get("/", (request: Request, response: Response) => {
 });
 
 router.get("/:slug", (request: Request, response: Response) => {
-  const slug: string = request.params.slug;
-  if (!kebabCaseValidator(slug)) {
+  const sectionName: string = request.params.slug;
+  if (!kebabCaseValidator(sectionName)) {
     response
       .status(400)
       .send({ error: "Please Provide Section Name in kebab-case" });
   }
-  response.send(`slug = ${slug}`);
+  const guardianRSSFeed = getGuardianRSSFeedXML(sectionName);
+  console.log("working")
+  response.send(`slug = ${sectionName}`);
 });
 
 export { router as guardianRouter };

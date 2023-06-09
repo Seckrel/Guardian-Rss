@@ -1,8 +1,0 @@
-{
-    "watch": ["src"],
-    "ext": "ts,json",
-    "execMap": {
-        "ts": "ts-node"
-    },
-    "exec": "ts-node --esm src/index.ts"
-}
