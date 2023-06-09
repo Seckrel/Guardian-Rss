@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
-import { guardianRouter } from "./routers/guardianRouter.js";
+import { guardianRouter } from "@routers/guardianRouter";
 
 dotenv.config();
 
