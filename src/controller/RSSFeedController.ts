@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { kebabCaseValidator } from "@validators/paramsValidator";
-import { fetchXMLRSSFeed } from "@services/guardianRSSService";
+import { fetchJSONRSSFeed, parseJSONToXML } from "@services/guardianRSSService";
 
 export const getGuardianRSSFeed = async (
   request: Request,
@@ -14,10 +14,12 @@ export const getGuardianRSSFeed = async (
       .json({ error: "Please Provide Section Name in kebab-case" });
   }
 
-  const guardianRSSFeed = await fetchXMLRSSFeed(sectionName);
+  const guardianRSSFeed = await fetchJSONRSSFeed(sectionName);
 
   if (!guardianRSSFeed?.ok) {
     response.status(guardianRSSFeed?.status).json({ error: "error message" });
   }
-  response.status(guardianRSSFeed?.status).json({ message: "done" });
+  const rssXMLFeed = parseJSONToXML(guardianRSSFeed.rssFeedJSON);
+  response.contentType("application/xml");
+  response.status(guardianRSSFeed?.status).send((await rssXMLFeed).toString());
 };
