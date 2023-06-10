@@ -516,6 +516,6 @@ pip-selfcheck.json
 # End of https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode,Node,nextjs,yarn,python,venv,django,vite
 n
 
-postgres-data/
+postgres-data
 
 dump.rdb

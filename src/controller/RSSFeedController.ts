@@ -21,14 +21,17 @@ export const getGuardianRSSFeed = async (
   const sectionName: string = request.params.slug;
 
   if (!kebabCaseValidator(sectionName)) {
+    response.contentType("application/json");
     response
       .status(400)
       .json({ error: "Please Provide Section Name in kebab-case" });
+    return;
   }
 
   const guardianRSSFeed = await fetchJSONRSSFeed(sectionName); // fetching JSON RSS from The Guardian
 
   if (!guardianRSSFeed?.ok) {
+    response.contentType("application/json");
     response
       .status(guardianRSSFeed?.status)
       .json({ error: `Section "${sectionName}" Not Found!!` });
