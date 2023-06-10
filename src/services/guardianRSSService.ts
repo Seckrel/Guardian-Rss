@@ -1,5 +1,6 @@
+import { IGuardianResponse } from "@gobal-types/types";
 export const fetchXMLRSSFeed = async (sectionName: string) => {
-  const guardianAPIURI = `https://content.guardianapis.com/${sectionName}?api-key=${process.env.GUARDIAN_API_KEY}&format=xml`;
+  const guardianAPIURI = `https://content.guardianapis.com/${sectionName}?api-key=${process.env.GUARDIAN_API_KEY}&format=json`;
 
   const requestOptions: RequestInit = {
     method: "GET",
@@ -8,7 +9,7 @@ export const fetchXMLRSSFeed = async (sectionName: string) => {
   let guardianRespond;
   try {
     guardianRespond = await fetch(guardianAPIURI, requestOptions);
-    const rssFeedContent: string = await guardianRespond.text();
+    const rssFeedContent = await guardianRespond.json();
 
     return {
       ok: guardianRespond?.ok,
@@ -23,4 +24,8 @@ export const fetchXMLRSSFeed = async (sectionName: string) => {
       status: 400,
     };
   }
+};
+
+export const parseXMLToJSON = async (rssContentJSON: IGuardianResponse) => {
+
 };
