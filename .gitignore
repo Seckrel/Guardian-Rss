@@ -517,3 +517,5 @@ pip-selfcheck.json
 n
 
 postgres-data/
+
+dump.rdb
