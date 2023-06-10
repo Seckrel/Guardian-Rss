@@ -19,6 +19,7 @@ const cacheReturnSectionBasedRSS = async (
     console.log("cache hit");
     response.contentType("application/xml");
     response.send(rssFeedForSection?.toString());
+    return;
   } else {
     console.log("cache miss");
     next();
@@ -39,8 +40,10 @@ const kebabCaseQueryParamsValidation = (
     response
       .status(400)
       .json({ error: "Please Provide Section Name in kebab-case" });
+    return;
+  } else {
+    next();
   }
-  next();
 };
 
 export { cacheReturnSectionBasedRSS, kebabCaseQueryParamsValidation };
