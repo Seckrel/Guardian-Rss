@@ -4,10 +4,13 @@ import {
 } from "@gobal-types/types";
 import xmlbuilder from "xmlbuilder2";
 
-export const fetchJSONRSSFeed = async (sectionName: string) => {
-  /* 
-    Service that fetches JSON RSS feed from The Guardian's API
-  */
+export const fetchJSONRSSFeed = async (sectionName: Readonly<string>) => {
+  /**
+   * Service that fetches JSON RSS feed from The Guardian's API
+   *
+   * @param sectionName (String): name of section to fetch
+   * @returns (Object): with keys ok, rssFeedJSON, and status
+   */
 
   const guardianAPIURI = `https://content.guardianapis.com/${sectionName}?api-key=${process.env.GUARDIAN_API_KEY}&format=json`;
 
@@ -35,10 +38,13 @@ export const fetchJSONRSSFeed = async (sectionName: string) => {
   }
 };
 
-export const parseJSONToXML = async (rssContentJSON: IGuardianOkResponse) => {
-  /* 
-    Service that converts guardians JSON RSS feed to RSS (version 2.0) XML 
-  */
+export const parseJSONToXML = async (rssContentJSON: Readonly<IGuardianOkResponse>) => {
+  /**
+   * Service that converts guardians JSON RSS feed to RSS (version 2.0) XML
+   *
+   * @param rssContentJSON (IGuardianOkResponse): JSON returned by Guardian RSS API
+   * @returns rootXMLNode (XMLBuilder): xml RSS feed parsed from JSON RSS data
+   */
 
   const rootXMLNode = xmlbuilder
     .create({ version: "2.0" })

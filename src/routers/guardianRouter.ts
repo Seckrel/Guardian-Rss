@@ -10,10 +10,6 @@ import { asyncHandler } from "@middleware/utils/AsyncHandler";
 
 const router: ExpressRouter = ExpressRouter();
 
-router.get("/", (request: Request, response: Response) => {
-  response.send("hello world");
-});
-
 router.get(
   "/:slug",
 
@@ -21,6 +17,6 @@ router.get(
   asyncHandler((req, res, next) => cacheReturnSectionBasedRSS(req, res, next)),
 
   getGuardianRSSFeed
-);
+); // to get XML feed from the Guardian JSON RSS API
 
 export { router as guardianRouter };

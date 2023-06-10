@@ -7,6 +7,10 @@ const cacheReturnSectionBasedRSS = async (
   response: Response,
   next: NextFunction
 ) => {
+  /**
+   * Middleware that uses section name slug as key to check if related RSS feed is in the cache memory
+   */
+
   const sectionName: string = request.params.slug;
 
   const rssFeedForSection = await redisClient?.get(sectionName);
@@ -14,7 +18,7 @@ const cacheReturnSectionBasedRSS = async (
   if (rssFeedForSection !== null) {
     console.log("cache hit");
     response.contentType("application/xml");
-    response.send((await rssFeedForSection)?.toString());
+    response.send(rssFeedForSection?.toString());
   } else {
     console.log("cache miss");
     next();
@@ -26,6 +30,9 @@ const kebabCaseQueryParamsValidation = (
   response: Response,
   next: NextFunction
 ) => {
+  /**
+   * Middleware to validate if section name slug is in kebab-case
+   */
   const sectionName: string = request.params.slug;
 
   if (!kebabCaseValidator(sectionName)) {
