@@ -1,6 +1,7 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import dotenv from "dotenv";
 import { guardianRouter } from "@routers/GuardianRouter";
+import { logsRouter } from "@routers/LogsRouter";
 import { appLoggerMiddleWare } from "@middleware/LoggerMiddleware";
 import internalErrorHandlerMiddleware from "@middleware/ErrorsHandlerMiddleware";
 import swaggerDocs from "./swagger";
@@ -14,6 +15,7 @@ app.use(appLoggerMiddleWare);
 app.use(internalErrorHandlerMiddleware);
 
 app.use("/v1/rss-feed", guardianRouter); // API that handles all The Guardian RSS feed related controllers
+app.use("/v1/logs", logsRouter)
 
 // use only in debug mode (dev mode)
 if (process.env.DEBUG === "1") {
