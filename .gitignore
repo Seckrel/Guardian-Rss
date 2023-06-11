@@ -519,3 +519,5 @@ n
 postgres-data
 
 dump.rdb
+
+pg_env.txt

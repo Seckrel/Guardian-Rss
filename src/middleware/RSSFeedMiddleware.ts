@@ -40,6 +40,7 @@ const kebabCaseQueryParamsValidation = (
     response
       .status(400)
       .json({ error: "Please Provide Section Name in kebab-case" });
+    response.end();
     return;
   } else {
     next();
