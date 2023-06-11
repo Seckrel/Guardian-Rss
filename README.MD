@@ -22,3 +22,24 @@ docker-compose up -d
 ```
 docker-compose logs -f web
 ```
+
+# APIs
+
+1. to fetch RSS feed
+```
+/v1/rss-feed/[section-name]
+```
+
+2. to fetch logs
+```
+/v1/logs/?level=&orderBy=&order=
+```
+
+- level: info | warn | error
+- orderBy: message | id | level | meta | ts (default id)
+- order: asc | desc (default asc)
+
+3. Swagger Ui API doc
+```
+/api-docs/
+```
