@@ -1,0 +1,22 @@
+PORT=8000
+
+# redis
+REDIS_USER=
+REDIS_PASSWORD=
+REDIS_HOST=redis
+REDIS_DB_NUMBER=0
+REDIS_PORT=6379
+GUARDIAN_SECTION_CACHE_EX_TIME_MIN=10
+
+# replace with api from the guardians 
+GUARDIAN_API_KEY=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+
+# postgres
+POSTGRES_HOST=psql-kotuko
+POSTGRES_DB=kotuko_task
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_PORT=5432
+POSTGRES_URL=postgresql://postgres:postgres@psql-kotuko:5432/kotuko_task
+
+
