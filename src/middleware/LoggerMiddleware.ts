@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from "express";
 import expressWinston from "express-winston";
 import { createLogger, format } from "winston";
 import PostgresTransport from "../utils/PostgresTransport";
-import { log, error } from "console";
 
 const appLoggerMiddleWare = (
   request: Request,
@@ -21,16 +20,25 @@ const appLoggerMiddleWare = (
   });
 
   const oldStatus = response.status;
-  
+
+  const uri = request.originalUrl;
+  const requestMethod = request.method;
+
   response.status = (code: number) => {
     if (code >= 100 && code < 400) {
-      logger.info(`Informational Message: Status code ${code}`);
+      logger.info(
+        `Informational Message: Status code ${code} for ${requestMethod} ${uri}`
+      );
     }
     if (code >= 400 && code < 500) {
-      logger.warn(`Warning Message: Status code ${code}`);
+      logger.warn(
+        `Warning Message: Status code ${code} for ${requestMethod} ${uri}`
+      );
     }
     if (code >= 500) {
-      logger.error(`Error Message: Status code ${code}`);
+      logger.error(
+        `Error Message: Status code ${code} for ${requestMethod} ${uri}`
+      );
     }
     return oldStatus.apply(response, [code]);
   };
