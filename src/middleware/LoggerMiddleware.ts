@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import expressWinston from "express-winston";
 import { createLogger, format } from "winston";
 import PostgresTransport from "../utils/PostgresTransport";
 
@@ -8,6 +7,10 @@ const appLoggerMiddleWare = (
   response: Response,
   next: NextFunction
 ) => {
+  /**
+   * Middleware to log each request/response made to the server
+   */
+
   const postgresTransport = new PostgresTransport({ tableName: "logs" });
 
   const logger = createLogger({
@@ -23,7 +26,16 @@ const appLoggerMiddleWare = (
 
   const uri = request.originalUrl;
   const requestMethod = request.method;
+  const requestIPAddress = request.ip;
 
+  // addd more inforation to meta-data
+  logger.defaultMeta = {
+    method: requestMethod,
+    originalUrl: uri,
+    requestIPAddress: requestIPAddress,
+  };
+
+  // custom classification of log based on response status code
   response.status = (code: number) => {
     if (code >= 100 && code < 400) {
       logger.info(

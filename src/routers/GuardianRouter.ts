@@ -1,4 +1,4 @@
-import { Router as ExpressRouter, Response, Request } from "express";
+import { Router as ExpressRouter } from "express";
 import { getGuardianRSSFeed } from "@controller/RSSFeedController";
 
 // middlewares
