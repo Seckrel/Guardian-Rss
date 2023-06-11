@@ -1,4 +1,6 @@
+# express
 PORT=8000
+DEBUG=1 # if 1 development mode
 
 # redis
 REDIS_USER=
@@ -8,8 +10,7 @@ REDIS_DB_NUMBER=0
 REDIS_PORT=6379
 GUARDIAN_SECTION_CACHE_EX_TIME_MIN=10
 
-# replace with api from the guardians 
-GUARDIAN_API_KEY=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+GUARDIAN_API_KEY=9d97b471-ee1c-473a-b293-7998a92c4182
 
 # postgres
 POSTGRES_HOST=psql-kotuko
