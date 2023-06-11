@@ -1,0 +1,7 @@
+#Change me to pg_env.txt ; This will create db & postgres role accordingly.
+#You can change pgadmin email and password accordingly.
+
+POSTGRES_USER=postgres
+POSTGRES_DB=kotuko_task
+POSTGRES_PASSWORD=postgres
+
