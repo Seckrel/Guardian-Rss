@@ -2,7 +2,6 @@
 #You can change pgadmin email and password accordingly.
 
 POSTGRES_USER=postgres
-POSTGRES_DB=db
+POSTGRES_DB=kotuko_task
 POSTGRES_PASSWORD=postgres
-PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
-PGADMIN_DEFAULT_PASSWORD=root
+

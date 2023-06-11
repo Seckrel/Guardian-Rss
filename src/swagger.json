@@ -1,0 +1,106 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "REST API For The Guardian RSS Feed",
+      "description": "Get The Guardian RSS Feed in XML",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:8000",
+    "basePath": "/v1",
+    "schema": [
+        "http"
+    ],
+    "paths": {
+        "/rss-feed/{slug}": {
+            "produces": ["application/xml"],
+            "parameters": [
+                {
+                    "name": "slug",
+                    "in": "path",
+                    "required": true,
+                    "description": "Section name in The Guardian",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "RSS"
+                ],
+                "summary": "Get RSS feed XML of a section",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/logs/": {
+            "produces": ["application/json"],
+            "parameters": [
+                {
+                    "name": "level",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "Level of log to retrive"
+                },
+                {
+                    "name": "orderBy",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "Field to Order By"
+                },
+                {
+                    "name": "order",
+                    "in": "query",
+                    "required": false,
+                    "type": "string",
+                    "description": "Order (asc or desc)"
+                }
+            ],
+            "get": {
+                "tags": ["Logs"],
+                "summary": "Get Logs Info from DB",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema": {
+                            "$ref": "#defination/Logs"
+                        }
+                    },
+                    "404": {
+                        "description": "Log not found"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Logs": {
+            "required": ["id", "ts", "level", "message", "meta"],
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "uniqueItems": true
+                },
+                "ts": {
+                    "type": "string"
+                },
+                "level": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "meta": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

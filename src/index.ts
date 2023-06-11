@@ -1,18 +1,26 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import dotenv from "dotenv";
-import { guardianRouter } from "./routers/guardianRouter.js";
+import { guardianRouter } from "@routers/GuardianRouter";
+import { logsRouter } from "@routers/LogsRouter";
+import { appLoggerMiddleWare } from "@middleware/LoggerMiddleware";
+import internalErrorHandlerMiddleware from "@middleware/ErrorsHandlerMiddleware";
+import swaggerDocs from "./swagger";
 
 dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT;
 
-// app.get("/", (req, res) => {
-//   console.log("working");
-//   return res.send({ msg: "hello" });
-// });
+app.use(appLoggerMiddleWare);
+app.use(internalErrorHandlerMiddleware);
 
-app.use("/v1/rss-feed", guardianRouter);
+app.use("/v1/rss-feed", guardianRouter); // API that handles all The Guardian RSS feed related controllers
+app.use("/v1/logs", logsRouter)
+
+// use only in debug mode (dev mode)
+if (process.env.DEBUG === "1") {
+  swaggerDocs(app);
+}
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
