@@ -1,0 +1,25 @@
+# Ignore development and system files
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Ignore build artifacts
+dist
+build
+
+# Ignore Docker-related files
+.dockerignore
+.docker
+
+# Ignore version control files
+.git
+.gitignore
+
+# Ignore specific files
+pg_env.txt
+entrypoint.sh
+
+# Ignore volumes
+postgres-data
+redis_data
+dump.rdb
