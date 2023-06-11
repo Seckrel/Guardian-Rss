@@ -6,6 +6,15 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("POSTGRES_URL")
+}
+
+
+model Logger {
+  id Int @id @default(autoincrement())
+  ts DateTime @default(now())
+  level String @db.VarChar(10)
+  msg String
+  meta Json?
 }
