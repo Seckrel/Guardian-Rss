@@ -10,13 +10,6 @@ export const getGuardianRSSFeed = async (
   request: Request,
   response: Response
 ) => {
-  /**
-   * API that handles fetching JSON RSS feed of The Guardian and convert it into XML RSS feed
-   *
-   * @param request (HTTP Request)
-   * @param Response (HTTP Response)
-   * @returns
-   */
 
   const sectionName: string = request.params.slug;
 

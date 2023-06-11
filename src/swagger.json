@@ -1,0 +1,42 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "REST API For The Guardian RSS Feed",
+      "description": "Get The Guardian RSS Feed in XML",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:8000",
+    "basePath": "/v1",
+    "schema": [
+        "http"
+    ],
+    "paths": {
+        "/rss-feed/{slug}": {
+            "produces": ["application/xml"],
+            "parameters": [
+                {
+                    "name": "slug",
+                    "in": "path",
+                    "required": true,
+                    "description": "Section name in The Guardian",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "RSS"
+                ],
+                "summary": "Get RSS feed XML of a section",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    }
+}
