@@ -70,7 +70,7 @@
                     "200": {
                         "description": "Ok",
                         "schema": {
-                            "$ref": "#defination/Logs"
+                            "$ref": "#definitions/Logs"
                         }
                     },
                     "404": {
