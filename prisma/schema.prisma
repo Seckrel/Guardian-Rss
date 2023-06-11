@@ -7,14 +7,17 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("POSTGRES_URL")
+  url = env("POSTGRES_URL")
+  // url = "postgresql://postgres:postgres@psql-kotuko:5432/kotuko_task"
 }
 
 
-model Logger {
+model logger {
   id Int @id @default(autoincrement())
   ts DateTime @default(now())
   level String @db.VarChar(10)
   msg String
   meta Json?
+
+  @@index([id, ts])
 }
